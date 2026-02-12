@@ -4,17 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Felix Zöllner | ZNR audio - Professionelle Audioproduktion</title>
-    <meta name="description" content="Portfolio von Felix Zöllner - ZNR audio. Professioneller Tonmeister in Dresden für Film, Musik, Podcast und Industrie. Sounddesign & Mischung.">
-    <meta name="keywords" content="Felix Zöllner, ZNR audio, Tonmeister, Sounddesign, Mischung, Dresden, Filmton, Musikproduktion">
+    <meta name="description" content="Felix Zöllner - ZNR audio. Tonmeister in Dresden für Film und Musik.">
+    <meta name="keywords" content="Felix Zöllner, ZNR audio, Tonmeister, Sounddesign, Mischung, Dresden, Filmton, Postproduktion, Re-recording Mixer , Musikproduktion , Dolby Atmos , O-Ton , TV , Studio , ADR">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+        /* --- CSS VARIABLES & RESET --- */
         :root {
-            --dark: #0a0a0a;
-            --medium-dark: #1a1a1a;
-            --light-gray: #f4f4f4;
-            --white: #ffffff;
+            --bg-dark: #0f0f0f;
+            --bg-med: #1a1a1a;
+            --bg-light: #f4f4f4;
             --accent: #8b0000; /* Dunkles Rot */
+            --text-white: #e0e0e0;
+            --text-gray: #a0a0a0;
+            --text-black: #121212;
+            --font-main: -apple-system, BlinkMacSystemFont, "SF-UI-Display-Regular", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
@@ -25,62 +30,99 @@
         }
 
         body {
-            font-family: "SF-UI-Display-Regular", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--dark);
-            color: var(--white);
-            line-height: 1.6;
+            font-family: var(--font-main);
+            background-color: var(--bg-dark);
+            color: var(--text-white);
             overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Layout Container */
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 40px;
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { width: 100%; display: block; object-fit: cover; }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 { font-weight: 400; letter-spacing: 1px; }
+        h2 { 
+            font-size: 2rem; 
+            margin-bottom: 2rem; 
+            text-transform: uppercase; 
+            border-left: 3px solid var(--accent);
+            padding-left: 15px;
         }
 
-        /* Hero Section */
-        .hero {
+        /* --- HERO SECTION --- */
+        #hero {
+            position: relative;
             height: 100vh;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 70%, var(--dark) 100%), 
-                        url('content/wallpaper_hero.png') center/cover no-repeat;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            position: relative;
+            background-color: var(--bg-dark);
+            overflow: hidden;
+        }
+
+        #hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('content/wallpaper_hero.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            /* Fade to dark at bottom */
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+        }
+
+        /* Hero Overlay Gradient for better text readability if image is bright */
+        #hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 20%;
+            background: linear-gradient(to bottom, transparent, var(--bg-dark));
+            z-index: 2;
+        }
+
+        .hero-content {
+            z-index: 10;
+            width: 80%;
+            max-width: 1000px;
+            animation: fadeIn 1.5s ease-out;
         }
 
         .logo-svg {
-            width: 300px;
+            width: 100%;
+            max-width: 600px;
             height: auto;
-            color: var(--white);
-            margin-bottom: 20px;
+            color: var(--text-white);
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
         }
 
-        .hero h1 {
+        .hero-desc {
             font-size: 1.2rem;
-            letter-spacing: 4px;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            font-weight: 300;
-            margin-bottom: 30px;
         }
 
         .social-icons {
             display: flex;
-            gap: 25px;
+            justify-content: center;
+            gap: 20px;
         }
 
         .social-icons a {
-            color: var(--white);
             font-size: 1.5rem;
-            transition: var(--transition);
+            color: var(--text-white);
+            opacity: 0.7;
         }
+        .social-icons a:hover { opacity: 1; color: var(--accent); transform: translateY(-3px); }
 
-        .social-icons a:hover {
-            color: var(--accent);
-            transform: translateY(-3px);
         }
 
         /* Section Styling */
