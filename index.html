@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felix Zöllner | ZNR audio - Professionelle Audioproduktion</title>
-    <meta name="description" content="Felix Zöllner - ZNR audio. Tonmeister in Dresden für Film und Musik.">
-    <meta name="keywords" content="Felix Zöllner, ZNR audio, Tonmeister, Sounddesign, Mischung, Dresden, Filmton, Postproduktion, Re-recording Mixer , Musikproduktion , Dolby Atmos , O-Ton , TV , Studio , ADR">
+    <meta name="description" content="Felix Zöllner - ZNR audio. Professionelle Audioproduktion, Sounddesign, Ton-Schnitt und Mischung. Tonmeister für Film und Musik in Dresden.">
+    <meta name="keywords" content="Tonmeister, Sounddesign, Mischung, Dresden, Felix Zöllner, ZNR audio, Filmton, Musikproduktion, Recording, TV, Dolby Atmos, Dialog Schnitt, Studio, ADR, ">
+    <meta name="author" content="Felix Zöllner">
+    <title>Felix Zöllner | ZNR audio</title>
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- CSS VARIABLES & RESET --- */
+        /* --- 1. RESET & VARIABLES --- */
         :root {
-            --bg-dark: #0f0f0f;
-            --bg-med: #1a1a1a;
-            --bg-light: #f4f4f4;
-            --accent: #8b0000; /* Dunkles Rot */
-            --text-white: #e0e0e0;
-            --text-gray: #a0a0a0;
-            --text-black: #121212;
-            --font-main: -apple-system, BlinkMacSystemFont, "SF-UI-Display-Regular", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            --bg-dark: #0a0a0a;
+            --bg-medium: #1a1a1a;
+            --bg-light: #f4f4f4; /* Hellgrau für Musik */
+            --bg-white: #ffffff;
+            --accent-red: #8b0000; /* Dunkles Rot */
+            --text-light: #f0f0f0;
+            --text-dark: #111111;
+            --text-muted: #888888;
+            --font-main: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --container-width: 1400px;
+            --transition-speed: 0.4s;
         }
 
         * {
@@ -29,85 +32,120 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: var(--font-main);
             background-color: var(--bg-dark);
-            color: var(--text-white);
-            overflow-x: hidden;
+            color: var(--text-light);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        a { text-decoration: none; color: inherit; transition: var(--transition); }
-        ul { list-style: none; }
-        img { width: 100%; display: block; object-fit: cover; }
-
-        /* --- TYPOGRAPHY --- */
-        h1, h2, h3 { font-weight: 400; letter-spacing: 1px; }
-        h2 { 
-            font-size: 2rem; 
-            margin-bottom: 2rem; 
-            text-transform: uppercase; 
-            border-left: 3px solid var(--accent);
-            padding-left: 15px;
+        /* --- 2. TYPOGRAPHY & UTILS --- */
+        h1, h2, h3 {
+            font-weight: 400;
+            letter-spacing: 0.05em;
         }
 
-        /* --- HERO SECTION --- */
-        #hero {
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-transform: uppercase;
             position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-red);
+        }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            border: 1px solid currentColor;
+            background: transparent;
+            color: inherit;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all var(--transition-speed) ease;
+            margin-top: 2rem;
+        }
+
+        .btn:hover {
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+            color: white;
+        }
+
+        /* --- 3. HERO SECTION --- */
+        #hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
+            /* Wallpaper Hero Background */
+            background: url('content/wallpaper_hero.png') no-repeat center center/cover;
             text-align: center;
-            background-color: var(--bg-dark);
-            overflow: hidden;
         }
 
-        #hero-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('content/wallpaper_hero.png');
-            background-size: cover;
-            background-position: center;
-            z-index: 1;
-            /* Fade to dark at bottom */
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
-        }
-
-        /* Hero Overlay Gradient for better text readability if image is bright */
-        #hero::after {
+        /* Overlay für den Verlauf nach unten */
+        #hero::before {
             content: '';
             position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 20%;
-            background: linear-gradient(to bottom, transparent, var(--bg-dark));
-            z-index: 2;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 80%, var(--bg-dark) 100%);
+            z-index: 1;
         }
 
         .hero-content {
-            z-index: 10;
-            width: 80%;
-            max-width: 1000px;
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
             animation: fadeIn 1.5s ease-out;
         }
 
-        .logo-svg {
+        /* Logo SVG Styling */
+        .hero-logo {
             width: 100%;
             max-width: 600px;
             height: auto;
-            color: var(--text-white);
+            color: var(--text-light);
             margin-bottom: 1rem;
             filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
         }
 
-        .hero-desc {
+        .hero-tagline {
             font-size: 1.2rem;
-            color: var(--text-gray);
-            margin-bottom: 2rem;
-            letter-spacing: 2px;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
+            margin-bottom: 2rem;
+            opacity: 0.9;
         }
 
         .social-icons {
@@ -117,455 +155,815 @@
         }
 
         .social-icons a {
+            color: var(--text-light);
             font-size: 1.5rem;
-            color: var(--text-white);
-            opacity: 0.7;
-        }
-        .social-icons a:hover { opacity: 1; color: var(--accent); transform: translateY(-3px); }
-
+            transition: color 0.3s;
         }
 
-        /* Section Styling */
+        .social-icons a:hover {
+            color: var(--accent-red);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- 4. GRID SECTIONS (Film, Imagefilm, Musik) --- */
         section {
-            padding: 100px 0;
-            transition: background 0.5s;
+            padding: 80px 0;
         }
 
-        .section-dark { background-color: var(--dark); color: var(--white); }
-        .section-medium { background-color: var(--medium-dark); color: var(--white); }
-        .section-light { background-color: var(--light-gray); color: var(--dark); }
-        .section-white { background-color: var(--white); color: var(--dark); }
-
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 50px;
-            font-weight: 300;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-left: 4px solid var(--accent);
-            padding-left: 15px;
+        .section-dark {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
         }
 
-        /* Content Grid Logic */
-        .grid {
+        .section-medium {
+            background-color: var(--bg-medium);
+            color: var(--text-light);
+        }
+
+        .section-light {
+            background-color: var(--bg-light); /* Hellgrau für Musik */
+            color: var(--text-dark);
+        }
+        
+        .section-light h2::after {
+            background-color: var(--accent-red); /* Akzent bleibt */
+        }
+
+        .grid-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
+        /* Item Wrapper */
         .grid-item {
             position: relative;
-            cursor: pointer;
             overflow: hidden;
-            border-radius: 4px;
-            display: none; /* Hidden by default for JS logic */
+            cursor: pointer;
+            transition: opacity 0.5s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            /* Standardmäßig versteckt, wird via JS gesteuert */
+            display: none; 
         }
 
-        .grid-item:nth-child(-n+4) { display: block; } /* Show first 4 */
+        .grid-item.visible {
+            display: block;
+            animation: fadeInGrid 0.5s ease forwards;
+        }
+
+        @keyframes fadeInGrid {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         .grid-item img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
+        /* Zoom Effect on Hover (Kein Text!) */
         .grid-item:hover img {
-            transform: scale(1.08);
+            transform: scale(1.05);
         }
 
-        /* Image Formats */
-        .film-item img { aspect-ratio: 2/3; object-fit: cover; }
-        .imagefilm-item img { aspect-ratio: 16/9; object-fit: cover; }
-        .music-item img { aspect-ratio: 1/1; object-fit: cover; }
-
-        /* Show More Button */
-        .btn-container { text-align: center; margin-top: 40px; }
-        .btn-toggle {
-            background: none;
-            border: 1px solid currentColor;
-            padding: 12px 30px;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: var(--transition);
-            color: inherit;
+        /* Aspect Ratios */
+        /* Portrait (Film) ~ 2:3 */
+        #film .grid-item {
+            aspect-ratio: 2 / 3;
         }
-        .btn-toggle:hover {
-            background-color: var(--accent);
-            border-color: var(--accent);
-            color: white;
+        /* Landscape (Imagefilm) 16:9 */
+        #imagefilm .grid-item {
+            aspect-ratio: 16 / 9;
+        }
+        /* Square (Music) 1:1 */
+        #music .grid-item {
+            aspect-ratio: 1 / 1;
         }
 
-        /* Logos Section */
-        .logos-row {
+        .load-more-container {
+            text-align: center;
+            width: 100%;
+        }
+
+        /* --- 5. CLIENTS SECTION --- */
+        #clients {
+            background-color: var(--bg-white);
+            padding: 60px 0;
+            overflow: hidden; /* Verhindert Scrollbars */
+        }
+
+        .clients-wrapper {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Verteilt Logos gleichmäßig */
             align-items: center;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            padding: 20px 0;
+            flex-wrap: nowrap; /* Eine Zeile */
+            gap: 30px;
+            width: 100%;
         }
 
-        .logo-client {
-            height: 40px;
+        .client-logo {
+            flex: 0 1 auto;
+            max-height: 60px; /* Einheitliche Höhe */
             width: auto;
-            filter: grayscale(1) opacity(0.6);
-            transition: var(--transition);
-            margin: 0 15px;
+            max-width: 150px;
+            filter: grayscale(100%) opacity(0.6);
+            transition: filter 0.3s, opacity 0.3s;
         }
 
-        .logo-client:hover {
-            filter: grayscale(0) opacity(1);
+        .client-logo:hover {
+            filter: grayscale(0%) opacity(1);
         }
 
-        /* Contact Section */
+        /* --- 6. CONTACT SECTION --- */
+        #contact {
+            background-color: var(--bg-dark);
+            padding: 100px 0;
+            border-top: 1px solid #222;
+        }
+
         .contact-content {
             display: flex;
             align-items: center;
-            gap: 50px;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
         }
 
-        .profile-img {
+        .contact-photo {
             width: 300px;
             height: 300px;
-            filter: grayscale(1);
-            transition: var(--transition);
-            border-radius: 4px;
-            object-fit: cover;
-        }
-
-        .profile-img:hover { filter: grayscale(0); }
-
-        .hidden-contact {
-            display: inline-block;
-            background: var(--accent);
-            padding: 2px 10px;
-            border-radius: 3px;
-            color: white;
-            cursor: help;
-        }
-        .hidden-contact:hover { background: none; color: inherit; }
-        .hidden-contact span { display: none; }
-        .hidden-contact:hover span { display: inline; }
-        .hidden-contact:hover strong { display: none; }
-
-        /* Modal / Lightbox */
-        .modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
-            display: none;
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background: var(--medium-dark);
-            max-width: 900px;
-            width: 100%;
-            display: flex;
-            border-radius: 8px;
+            border-radius: 50%;
             overflow: hidden;
-            position: relative;
-            color: white;
+            flex-shrink: 0;
         }
 
-        .modal-img { width: 50%; object-fit: contain; background: #000; }
-        .modal-info { width: 50%; padding: 40px; display: flex; flex-direction: column; justify-content: center; }
-        .modal-info h3 { font-size: 1.8rem; margin-bottom: 20px; color: var(--accent); }
-        .modal-info p { margin-bottom: 10px; font-weight: 300; }
-        .role-highlight { 
-            margin-top: 20px; 
-            padding-top: 15px; 
-            border-top: 1px solid #444; 
-            font-weight: 600; 
-            color: var(--accent);
+        .contact-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease;
+        }
+
+        .contact-photo:hover img {
+            filter: grayscale(0%);
+        }
+
+        .contact-info {
+            max-width: 500px;
+        }
+
+        .contact-info p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+
+        .contact-reveal {
+            cursor: pointer;
+            color: var(--accent-red);
+            font-weight: bold;
+            display: inline-block;
+            margin-right: 20px;
+            border-bottom: 1px dotted var(--accent-red);
+            padding-bottom: 2px;
+        }
+        
+        .contact-reveal:hover {
+            color: white;
+            border-bottom-color: white;
+        }
+
+        /* --- 7. FOOTER --- */
+        footer {
+            background-color: #000;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-links button {
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            margin: 0 10px;
+            font-size: 0.9rem;
+        }
+
+        .footer-links button:hover {
+            color: var(--text-light);
+        }
+        
+        .lang-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--bg-medium);
+            border: 1px solid #444;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 99;
+            font-size: 0.8rem;
             text-transform: uppercase;
         }
 
-        .apple-music-btn {
+        /* --- 8. MODAL / LIGHTBOX --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background-color: var(--bg-medium);
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            display: flex;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+            border: 1px solid #333;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            z-index: 10;
+            line-height: 1;
+        }
+
+        .modal-image-col {
+            flex: 1;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-image-col img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .modal-info-col {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            line-height: 1.2;
+        }
+
+        .modal-meta {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .modal-details p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        .modal-role {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(139, 0, 0, 0.1); /* Hauch von Rot */
+            border-left: 3px solid var(--accent-red);
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .modal-apple-link {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
             margin-top: 20px;
-            color: #fa243c;
+            color: #fa243c; /* Apple Music Red */
             text-decoration: none;
+            font-weight: bold;
             font-size: 1.2rem;
         }
-
-        .close-modal {
-            position: absolute;
-            top: 20px; right: 20px;
-            font-size: 2rem; cursor: pointer; color: white;
+        
+        .modal-apple-link i {
+            margin-right: 10px;
+            font-size: 1.5rem;
         }
 
-        /* Footer */
-        footer {
-            padding: 40px 0;
-            background: #050505;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #666;
+        /* --- LEGAL MODAL --- */
+        #legal-modal-content {
+            flex-direction: column;
+            padding: 40px;
+            color: #ddd;
         }
-        .footer-links { margin-top: 10px; }
-        .footer-links a { color: #666; text-decoration: none; margin: 0 10px; }
-        .lang-toggle { position: absolute; right: 40px; bottom: 40px; }
 
-        /* Mobile Optimization */
-        @media (max-width: 768px) {
-            .grid { grid-template-columns: repeat(2, 1fr); }
-            .modal-content { flex-direction: column; max-height: 90vh; overflow-y: auto; }
-            .modal-img, .modal-info { width: 100%; }
-            .contact-content { flex-direction: column; text-align: center; }
-            .logo-svg { width: 200px; }
-            .container { padding: 0 20px; }
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 95%;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr); /* 2 Spalten auf Tablet */
+            }
+            .modal-content {
+                flex-direction: column;
+            }
+            .modal-image-col img {
+                max-height: 40vh;
+            }
+            .clients-wrapper {
+                flex-wrap: wrap; /* Logos umbrechen auf Tablet */
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            h2 { font-size: 1.8rem; }
+            .grid-container {
+                grid-template-columns: 1fr; /* 1 Spalte auf Mobile */
+            }
+            .contact-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .contact-info { text-align: center; }
+            .contact-photo {
+                width: 200px;
+                height: 200px;
+            }
+            .modal-info-col {
+                padding: 20px;
+            }
+            .modal-title { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <section class="hero">
-        <div class="logo-svg">
-            <svg viewBox="0 0 2220 1500" xmlns="http://www.w3.org/2000/svg">
-                <path fill="currentColor" d="m 1460.3324,1482.9524 c -4.5294,-2.3785 -4.392,0.5109 -4.392,-92.3542 0,-48.5249 0.2795,-88.9556 0.6212,-89.8459 1.7037,-4.4398 9.0621,-4.8736 11.3134,-0.6669 0.7308,1.3654 1.0654,29.7368 1.0654,90.3339 0,76.0914 -0.2038,88.6341 -1.4694,90.4411 -1.8082,2.5815 -4.631,3.4088 -7.1386,2.092 z m 178.608,-20.3276 c -13.4311,-3.5434 -23.7266,-11.2412 -28.1231,-21.0271 -3.2668,-7.2713 -5.1193,-16.2879 -4.3713,-21.2761 1.7276,-11.5206 7.0111,-20.2903 15.7334,-26.1149 11.0224,-7.3605 21.2757,-9.5296 56.761,-12.0083 8.525,-0.5955 16.0625,-1.2729 16.75,-1.5054 1.6225,-0.5487 1.6852,-13.8717 0.095,-20.1869 -1.5925,-6.3241 -7.6617,-12.4054 -15.1325,-15.1626 -4.3576,-1.6083 -8.0636,-2.1358 -15,-2.1352 -8.0914,7e-4 -9.9426,0.351 -15.2125,2.8784 -6.769,3.2465 -11.4372,7.736 -14.163,13.6208 l -1.8527,4 h -9.9922 -9.9921 l -0.3176,-3.307 c -0.4284,-4.4605 4.5133,-14.8227 9.8087,-20.5675 5.4191,-5.879 11.9584,-10.0074 21.1106,-13.3276 6.6786,-2.4228 8.7602,-2.687 21.3983,-2.7163 14.951,-0.035 19.3786,0.8802 30,6.1986 10.2917,5.1532 16.2783,11.7612 20.5834,22.7198 2.3478,5.9763 2.3584,6.2006 2.7099,56.8095 0.2665,38.3846 0.061,51.1618 -0.8427,52.25 -1.537,1.852 -17.9394,2.0517 -19.7506,0.2405 -0.7714,-0.7714 -1.2,-4.7284 -1.2,-11.0778 v -9.8779 l -6.75,6.947 c -7.2457,7.4571 -12.7632,10.7516 -23.6053,14.0948 -8.1274,2.5061 -20.3032,2.7319 -28.6447,0.5312 z m 35.2799,-21.5034 c 10.2381,-3.9223 18.6164,-13.0937 21.3547,-23.3761 1.8539,-6.9611 1.802,-16.433 -0.094,-17.1606 -0.8027,-0.308 -10.3652,-0.099 -21.25,0.464 -23.5628,1.219 -31.7935,3.3145 -38.4145,9.7797 -6.5297,6.3761 -7.474,16.1385 -2.2351,23.1068 2.8635,3.8088 10.1834,8.321 15.2562,9.4045 6.1635,1.3164 19.1094,0.185 25.3826,-2.2183 z m 105.1752,20.376 c -11.9661,-4.1497 -19.2387,-10.3368 -24.4375,-20.7899 -5.9458,-11.9552 -6.0624,-13.3087 -5.7772,-67.0619 l 0.2596,-48.9381 h 10.5 10.5 l 0.5,48.5 0.5,48.5 2.5959,5.5 c 5.2328,11.0867 13.1318,16.0659 26.6541,16.8018 16.7445,0.9113 27.9557,-5.3592 34.9777,-19.5631 l 3.7723,-7.6307 0.5,-46.054 0.5,-46.054 h 10.5 10.5 v 69 69 l -8.8489,0.2904 c -5.6643,0.1859 -9.3531,-0.1281 -10.25,-0.8725 -1.0192,-0.8458 -1.4011,-3.7188 -1.4011,-10.5403 0,-5.1577 -0.3539,-9.3776 -0.7865,-9.3776 -0.4326,0 -2.4681,2.2524 -4.5234,5.0053 -7.8569,10.524 -20.0791,15.9968 -37.1901,16.6528 -10.0591,0.3856 -11.6881,0.183 -19.0449,-2.3682 z m 156.0449,2.0305 c -31.2386,-6.9915 -49.4302,-32.6872 -49.4302,-69.8204 0,-23.6815 7.9245,-44.2344 21.8928,-56.7811 21.3251,-19.1546 58.5185,-17.7727 75.7265,2.8136 2.0539,2.4571 4.0891,4.4675 4.5227,4.4675 0.4335,0 0.7951,-16.3125 0.8035,-36.25 0.01,-19.9375 0.3827,-36.8291 0.8318,-37.5368 0.6004,-0.9464 3.5733,-1.211 11.2347,-1 l 10.4182,0.2868 0.2551,95.9379 c 0.2022,76.0893 0,96.1027 -1,96.7346 -2.0368,1.2931 -18.1973,0.9853 -19.5551,-0.3725 -0.7613,-0.7613 -1.2,-4.6 -1.2,-10.5 0,-5.115 -0.2581,-9.3 -0.5737,-9.3 -0.3155,0 -2.903,2.5533 -5.75,5.674 -6.6014,7.2362 -12.2143,10.7761 -21.9779,13.861 -7.4537,2.3551 -19.8718,3.2013 -26.1984,1.7854 z m 29.3226,-23.868 c 11.9237,-5.9652 19.711,-17.2845 22.7236,-33.0302 1.844,-9.6377 1.8364,-16.2465 -0.03,-26.0008 -3.8309,-20.0221 -15.6974,-33.3969 -32.283,-36.3861 -19.8549,-3.5783 -37.9091,9.4882 -43.6334,31.5793 -2.7118,10.4651 -3.0388,19.2596 -1.1136,29.9518 4.3488,24.1528 17.8776,37.2432 38.6293,37.3777 7.9259,0.051 9.1834,-0.2281 15.707,-3.4917 z m 172.2119,21.9979 c -4.6561,-1.4081 -10.6245,-3.7351 -13.2631,-5.1712 -6.5374,-3.5581 -15.8483,-12.1655 -19.7689,-18.2752 -10.7622,-16.7715 -14.6541,-41.526 -10.0424,-63.876 6.9909,-33.8805 32.1667,-53.0198 66.7953,-50.7795 16.0066,1.0355 30.1937,7.266 40.1206,17.6196 17.5316,18.285 23.3444,51.5892 14.062,80.5669 -6.2197,19.4166 -19.1779,32.7122 -38.2408,39.2364 -5.644,1.9317 -9.7869,2.547 -19.1972,2.8511 -10.6742,0.3451 -12.9353,0.1051 -20.4655,-2.1721 z m 35.2674,-21.2727 c 6.3035,-2.8237 15.1788,-11.8015 18.2082,-18.4187 5.7031,-12.4572 7.2062,-30.8933 3.6942,-45.3106 -2.3714,-9.7349 -4.6905,-14.464 -10.1045,-20.6049 -14.3135,-16.2354 -41.1853,-16.5891 -56.2363,-0.7402 -5.6697,5.9703 -8.5867,11.9189 -10.9827,22.3968 -6.3595,27.81 3.5812,54.636 23.2979,62.8716 5.7322,2.3944 7.2999,2.6086 16.8213,2.2987 8.0528,-0.2621 11.6192,-0.843 15.3019,-2.4927 z m -126.0589,22.013 c -0.9933,-0.6458 -1.2031,-15.1745 -1,-69.2539 l 0.257,-68.4367 h 10.5 10.5 v 69 69 l -9.5,0.2539 c -5.225,0.1397 -10.0656,-0.1138 -10.757,-0.5633 z m -615.3979,-13.7545 c -1.2648,-1.0743 -1.4736,-1.5511 -1.8451,-4.0967 v -51.2939 c 0,-50.7122 0.051,-52.0967 2,-54.0455 2.4987,-2.4987 7.1614,-2.5841 9.345,-0.1713 1.4959,1.653 1.655,6.8922 1.655,54.5 0,51.338 -0.051,52.7219 -2,54.6713 -2.6753,2.6753 -6.1789,3.412 -9.1549,0.4361 z m 54.1549,-0.4361 c -1.9486,-1.9486 -2,-3.3333 -2,-53.9182 0,-28.555 0.2795,-52.6467 0.6212,-53.537 1.0028,-2.6134 5.5983,-4.5497 7.9097,-3.3328 4.5418,2.3911 4.4699,1.483 4.4538,56.2291 -0.01,28.6324 -0.7364,52.9445 -1.1405,53.5497 -0.9933,1.4876 -2.9219,3.1394 -4.8468,3.1394 -0.8611,0 -3.8974,-1.0302 -4.9974,-2.1302 z m -105.771,-18.6693 c -0.6991,-0.2813 -1.9366,-1.7984 -2.75,-3.3714 -1.2102,-2.3402 -1.479,-8.3876 -1.479,-33.2748 0,-29.2556 0.079,-30.5152 2.0726,-33.0496 1.3743,-1.7472 3.0343,-2.6349 4.9274,-2.6349 1.8931,0 3.5531,0.8877 4.9274,2.6349 1.9936,2.5344 2.0726,3.794 2.0726,33.0496 0,24.7378 -0.2731,30.9429 -1.463,33.244 -1.8886,3.6522 -4.7621,4.8289 -8.308,3.4022 z m 132.771,-1.3307 c -1.5724,-2.2116 -2,-3.3333 -2,-34.845 0,-30.5497 0.605,-32.5702 2.3059,-34.1095 2.4806,-2.2449 5.9174,-2.5185 8.347,-0.089 1.9168,1.9168 2.3471,3.3767 2.3471,34.0889 v 32.1322 l -0.8614,2.9281 -1.0725,1.1751 c -2.0215,1.8479 -6.8246,1.8716 -9.0661,-1.2809 z m -105.6359,-12.1696 c -1.1748,-0.5688 -2.6373,-2.1345 -3.25,-3.4794 -1.3782,-3.0248 -1.5119,-34.1744 -0.162,-37.7251 2.0798,-5.4703 8.8423,-5.858 11.5297,-0.6611 1.1842,2.29 1.5182,6.7035 1.5182,20.0625 l -0.3681,17.2492 -1.512,3.4753 c -3.1873,3.1874 -4.5968,2.6082 -7.7558,1.0786 z m -54.1351,-13.4997 c -1.9083,-0.7678 -4.229,-5.8351 -4.229,-9.234 0,-6.7287 4.6189,-11.1387 9.3897,-8.965 2.9788,1.3572 4.6103,4.8184 4.6103,9.7805 0,6.4645 -4.6564,10.4764 -9.771,8.4185 z m 186.3077,-1.2901 c -2.5519,-2.8198 -3.2041,-10.373 -1.1645,-13.4858 4.9094,-7.4927 12.6278,-3.7899 12.6278,6.058 0,3.6206 -1.4619,7.328 -3.3997,8.6219 -2.078,1.3875 -6.292,0.7635 -8.0636,-1.1941 z m 513.4633,-99.7621 c -5.8009,-2.1798 -10.2,-8.1222 -10.2,-13.7785 0,-14.1106 20.0171,-18.7723 26.1558,-6.0913 2.5172,5.1998 2.525,6.9351 0.056,12.3751 -2.6547,5.849 -10.5529,9.5459 -16.0118,7.4947 z M 0.30306721,1184.7075 c -0.92249997,-2.4104 0.1901,-104.9931 1.13729999,-104.869 0.55,0.072 141.9073028,-195.90295 314.1272028,-435.50005 267.1254,-371.632 313.5125,-435.6775 315.75,-435.9474 l 2.6228,-0.3164 v 109.8329 109.8329 l -223,311.716 c -122.65,171.4438 -223,312.34645 -223,313.11695 0,0.7704 1.0125,1.6722 2.25,2.0038 1.2375,0.3317 101.5875,0.6091 223,0.6166 l 220.75,0.014 v 64.9969 64.9969 l -316.6273,0.2531 c -210.3966,0.1682 -316.75570279,-0.082 -317.01000279,-0.7469 z M 652.94037,620.19965 V 55.19185 l 60.0096,0.2578 60.0097,0.2578 300.46643,430.5 300.4665,430.5 0.024,116.31645 0.024,116.3164 -2.6554,-0.3164 c -2.2986,-0.2739 -42.237,-56.8395 -297.2856,-421.05205 -162.04663,-231.4046 -295.20693,-421.3046 -295.91193,-422 -1.035,-1.021 -1.5575,-0.8908 -2.7144,0.6767 -1.2386,1.678 -1.4329,61.3658 -1.4329,440.25 v 438.30895 h -60.5 -60.5 z M 2050.7417,1182.7075 1930.5911,960.81935 c -94.3733,-174.2837 -120.6583,-222.0753 -122.5167,-222.7607 -3.0189,-1.1134 -270.6801,-0.6387 -271.8008,0.4821 -0.4582,0.4583 -0.9487,100.6958 -1.0898,222.75 l -0.2566,221.91675 h -70.9934 -70.9934 V 619.17405 55.14055 l 237.25,0.3198 237.25,0.3199 20,2.6554 c 62.8363,8.3427 115.5233,27.0938 160.5,57.1213 34.8659,23.2773 67.0471,56.7779 89.107,92.7606 21.9564,35.8137 36.7926,78.6097 43.4692,125.3899 2.5283,17.715 2.7189,21.4685 2.8177,55.5 0.1128,38.8228 -0.5703,49.0154 -5.0269,75 -7.6388,44.5383 -23.9656,87.0997 -47.1662,122.9547 -36.6716,56.6737 -92.755,100.9331 -156.2008,123.2691 -6.325,2.2268 -12.0744,4.5778 -12.7764,5.2245 -1.0161,0.9362 24.8117,48.0299 126.6455,230.922 36.3119,74.12945 101.2195,170.01555 132.1557,237.33215 -64.0022,-1.0095 -102.8489,-0.9963 -170.2235,-1.2024 z M 1847.4404,607.84935 c 52.655,-6.6028 90.0965,-21.482 121.6236,-48.333 43.3248,-36.8989 65.8904,-92.6756 65.8676,-162.8089 -0.017,-53.8625 -13.5562,-97.3212 -41.8139,-134.2203 -6.0437,-7.892 -21.5623,-23.5244 -30.6773,-30.9024 -24.2249,-19.6084 -61.1047,-35.6748 -97,-42.2571 -30.8343,-5.6543 -27.9619,-5.567 -184,-5.5947 l -144,-0.025 -0.2564,212 c -0.141,116.6 -0.031,212.5939 0.2454,213.3198 0.4135,1.0875 26.5898,1.2435 148.7564,0.886 129.2875,-0.3782 149.9178,-0.6422 161.2546,-2.0638 z M 21.704467,119.62385 c -0.1453,-36.621 -0.076,-66.771 0.1526,-67 0.5448,-0.5445 612.621803,-0.5445 613.166703,0 0.2291,0.229 0.2978,30.379 0.1526,67 l -0.264,66.5836 H 328.44037 21.968467 z M 682.69037,53.45805 c 16.6375,-0.154 43.8625,-0.154 60.5,0 16.6375,0.1539 3.025,0.2798 -30.25,0.2798 -33.275,0 -46.8875,-0.1259 -30.25,-0.2798 z m 823.50003,-6e-4 c 63.1125,-0.1421 166.3875,-0.1421 229.5,0 63.1125,0.1422 11.475,0.2585 -114.75,0.2585 -126.225,0 -177.8625,-0.1163 -114.75,-0.2585 z" />
-            </svg>
-        </div>
-        <h1 data-en="Professional Audio Production">Professionelle Audioproduktion</h1>
-        <div class="social-icons">
-            <a href="https://www.instagram.com/felix_znr/" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.crew-united.com/de/Felix-Zoellner_417100.html" target="_blank"><i class="fas fa-film"></i></a>
-            <a href="https://www.imdb.com/de/name/nm10693773/" target="_blank"><i class="fab fa-imdb"></i></a>
+    <button class="lang-toggle" id="langToggle">EN</button>
+
+    <section id="hero">
+        <div class="hero-content">
+            <div class="hero-logo">
+                <svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2220 1500" style="width:100%; height:auto;">
+                  <path fill="currentColor" d="m 1460.3324,1482.9524 c -4.5294,-2.3785 -4.392,0.5109 -4.392,-92.3542 0,-48.5249 0.2795,-88.9556 0.6212,-89.8459 1.7037,-4.4398 9.0621,-4.8736 11.3134,-0.6669 0.7308,1.3654 1.0654,29.7368 1.0654,90.3339 0,76.0914 -0.2038,88.6341 -1.4694,90.4411 -1.8082,2.5815 -4.631,3.4088 -7.1386,2.092 z m 178.608,-20.3276 c -13.4311,-3.5434 -23.7266,-11.2412 -28.1231,-21.0271 -3.2668,-7.2713 -5.1193,-16.2879 -4.3713,-21.2761 1.7276,-11.5206 7.0111,-20.2903 15.7334,-26.1149 11.0224,-7.3605 21.2757,-9.5296 56.761,-12.0083 8.525,-0.5955 16.0625,-1.2729 16.75,-1.5054 1.6225,-0.5487 1.6852,-13.8717 0.095,-20.1869 -1.5925,-6.3241 -7.6617,-12.4054 -15.1325,-15.1626 -4.3576,-1.6083 -8.0636,-2.1358 -15,-2.1352 -8.0914,7e-4 -9.9426,0.351 -15.2125,2.8784 -6.769,3.2465 -11.4372,7.736 -14.163,13.6208 l -1.8527,4 h -9.9922 -9.9921 l -0.3176,-3.307 c -0.4284,-4.4605 4.5133,-14.8227 9.8087,-20.5675 5.4191,-5.879 11.9584,-10.0074 21.1106,-13.3276 6.6786,-2.4228 8.7602,-2.687 21.3983,-2.7163 14.951,-0.035 19.3786,0.8802 30,6.1986 10.2917,5.1532 16.2783,11.7612 20.5834,22.7198 2.3478,5.9763 2.3584,6.2006 2.7099,56.8095 0.2665,38.3846 0.061,51.1618 -0.8427,52.25 -1.537,1.852 -17.9394,2.0517 -19.7506,0.2405 -0.7714,-0.7714 -1.2,-4.7284 -1.2,-11.0778 v -9.8779 l -6.75,6.947 c -7.2457,7.4571 -12.7632,10.7516 -23.6053,14.0948 -8.1274,2.5061 -20.3032,2.7319 -28.6447,0.5312 z m 35.2799,-21.5034 c 10.2381,-3.9223 18.6164,-13.0937 21.3547,-23.3761 1.8539,-6.9611 1.802,-16.433 -0.094,-17.1606 -0.8027,-0.308 -10.3652,-0.099 -21.25,0.464 -23.5628,1.219 -31.7935,3.3145 -38.4145,9.7797 -6.5297,6.3761 -7.474,16.1385 -2.2351,23.1068 2.8635,3.8088 10.1834,8.321 15.2562,9.4045 6.1635,1.3164 19.1094,0.185 25.3826,-2.2183 z m 105.1752,20.376 c -11.9661,-4.1497 -19.2387,-10.3368 -24.4375,-20.7899 -5.9458,-11.9552 -6.0624,-13.3087 -5.7772,-67.0619 l 0.2596,-48.9381 h 10.5 10.5 l 0.5,48.5 0.5,48.5 2.5959,5.5 c 5.2328,11.0867 13.1318,16.0659 26.6541,16.8018 16.7445,0.9113 27.9557,-5.3592 34.9777,-19.5631 l 3.7723,-7.6307 0.5,-46.054 0.5,-46.054 h 10.5 10.5 v 69 69 l -8.8489,0.2904 c -5.6643,0.1859 -9.3531,-0.1281 -10.25,-0.8725 -1.0192,-0.8458 -1.4011,-3.7188 -1.4011,-10.5403 0,-5.1577 -0.3539,-9.3776 -0.7865,-9.3776 -0.4326,0 -2.4681,2.2524 -4.5234,5.0053 -7.8569,10.524 -20.0791,15.9968 -37.1901,16.6528 -10.0591,0.3856 -11.6881,0.183 -19.0449,-2.3682 z m 156.0449,2.0305 c -31.2386,-6.9915 -49.4302,-32.6872 -49.4302,-69.8204 0,-23.6815 7.9245,-44.2344 21.8928,-56.7811 21.3251,-19.1546 58.5185,-17.7727 75.7265,2.8136 2.0539,2.4571 4.0891,4.4675 4.5227,4.4675 0.4335,0 0.7951,-16.3125 0.8035,-36.25 0.01,-19.9375 0.3827,-36.8291 0.8318,-37.5368 0.6004,-0.9464 3.5733,-1.211 11.2347,-1 l 10.4182,0.2868 0.2551,95.9379 c 0.2022,76.0893 0,96.1027 -1,96.7346 -2.0368,1.2931 -18.1973,0.9853 -19.5551,-0.3725 -0.7613,-0.7613 -1.2,-4.6 -1.2,-10.5 0,-5.115 -0.2581,-9.3 -0.5737,-9.3 -0.3155,0 -2.903,2.5533 -5.75,5.674 -6.6014,7.2362 -12.2143,10.7761 -21.9779,13.861 -7.4537,2.3551 -19.8718,3.2013 -26.1984,1.7854 z m 29.3226,-23.868 c 11.9237,-5.9652 19.711,-17.2845 22.7236,-33.0302 1.844,-9.6377 1.8364,-16.2465 -0.03,-26.0008 -3.8309,-20.0221 -15.6974,-33.3969 -32.283,-36.3861 -19.8549,-3.5783 -37.9091,9.4882 -43.6334,31.5793 -2.7118,10.4651 -3.0388,19.2596 -1.1136,29.9518 4.3488,24.1528 17.8776,37.2432 38.6293,37.3777 7.9259,0.051 9.1834,-0.2281 15.707,-3.4917 z m 172.2119,21.9979 c -4.6561,-1.4081 -10.6245,-3.7351 -13.2631,-5.1712 -6.5374,-3.5581 -15.8483,-12.1655 -19.7689,-18.2752 -10.7622,-16.7715 -14.6541,-41.526 -10.0424,-63.876 6.9909,-33.8805 32.1667,-53.0198 66.7953,-50.7795 16.0066,1.0355 30.1937,7.266 40.1206,17.6196 17.5316,18.285 23.3444,51.5892 14.062,80.5669 -6.2197,19.4166 -19.1779,32.7122 -38.2408,39.2364 -5.644,1.9317 -9.7869,2.547 -19.1972,2.8511 -10.6742,0.3451 -12.9353,0.1051 -20.4655,-2.1721 z m 35.2674,-21.2727 c 6.3035,-2.8237 15.1788,-11.8015 18.2082,-18.4187 5.7031,-12.4572 7.2062,-30.8933 3.6942,-45.3106 -2.3714,-9.7349 -4.6905,-14.464 -10.1045,-20.6049 -14.3135,-16.2354 -41.1853,-16.5891 -56.2363,-0.7402 -5.6697,5.9703 -8.5867,11.9189 -10.9827,22.3968 -6.3595,27.81 3.5812,54.636 23.2979,62.8716 5.7322,2.3944 7.2999,2.6086 16.8213,2.2987 8.0528,-0.2621 11.6192,-0.843 15.3019,-2.4927 z m -126.0589,22.013 c -0.9933,-0.6458 -1.2031,-15.1745 -1,-69.2539 l 0.257,-68.4367 h 10.5 10.5 v 69 69 l -9.5,0.2539 c -5.225,0.1397 -10.0656,-0.1138 -10.757,-0.5633 z m -615.3979,-13.7545 c -1.2648,-1.0743 -1.4736,-1.5511 -1.8451,-4.0967 v -51.2939 c 0,-50.7122 0.051,-52.0967 2,-54.0455 2.4987,-2.4987 7.1614,-2.5841 9.345,-0.1713 1.4959,1.653 1.655,6.8922 1.655,54.5 0,51.338 -0.051,52.7219 -2,54.6713 -2.6753,2.6753 -6.1789,3.412 -9.1549,0.4361 z m 54.1549,-0.4361 c -1.9486,-1.9486 -2,-3.3333 -2,-53.9182 0,-28.555 0.2795,-52.6467 0.6212,-53.537 1.0028,-2.6134 5.5983,-4.5497 7.9097,-3.3328 4.5418,2.3911 4.4699,1.483 4.4538,56.2291 -0.01,28.6324 -0.7364,52.9445 -1.1405,53.5497 -0.9933,1.4876 -2.9219,3.1394 -4.8468,3.1394 -0.8611,0 -3.8974,-1.0302 -4.9974,-2.1302 z m -105.771,-18.6693 c -0.6991,-0.2813 -1.9366,-1.7984 -2.75,-3.3714 -1.2102,-2.3402 -1.479,-8.3876 -1.479,-33.2748 0,-29.2556 0.079,-30.5152 2.0726,-33.0496 1.3743,-1.7472 3.0343,-2.6349 4.9274,-2.6349 1.8931,0 3.5531,0.8877 4.9274,2.6349 1.9936,2.5344 2.0726,3.794 2.0726,33.0496 0,24.7378 -0.2731,30.9429 -1.463,33.244 -1.8886,3.6522 -4.7621,4.8289 -8.308,3.4022 z m 132.771,-1.3307 c -1.5724,-2.2116 -2,-3.3333 -2,-34.845 0,-30.5497 0.605,-32.5702 2.3059,-34.1095 2.4806,-2.2449 5.9174,-2.5185 8.347,-0.089 1.9168,1.9168 2.3471,3.3767 2.3471,34.0889 v 32.1322 l -0.8614,2.9281 -1.0725,1.1751 c -2.0215,1.8479 -6.8246,1.8716 -9.0661,-1.2809 z m -105.6359,-12.1696 c -1.1748,-0.5688 -2.6373,-2.1345 -3.25,-3.4794 -1.3782,-3.0248 -1.5119,-34.1744 -0.162,-37.7251 2.0798,-5.4703 8.8423,-5.858 11.5297,-0.6611 1.1842,2.29 1.5182,6.7035 1.5182,20.0625 l -0.3681,17.2492 -1.512,3.4753 c -3.1873,3.1874 -4.5968,2.6082 -7.7558,1.0786 z m -54.1351,-13.4997 c -1.9083,-0.7678 -4.229,-5.8351 -4.229,-9.234 0,-6.7287 4.6189,-11.1387 9.3897,-8.965 2.9788,1.3572 4.6103,4.8184 4.6103,9.7805 0,6.4645 -4.6564,10.4764 -9.771,8.4185 z m 186.3077,-1.2901 c -2.5519,-2.8198 -3.2041,-10.373 -1.1645,-13.4858 4.9094,-7.4927 12.6278,-3.7899 12.6278,6.058 0,3.6206 -1.4619,7.328 -3.3997,8.6219 -2.078,1.3875 -6.292,0.7635 -8.0636,-1.1941 z m 513.4633,-99.7621 c -5.8009,-2.1798 -10.2,-8.1222 -10.2,-13.7785 0,-14.1106 20.0171,-18.7723 26.1558,-6.0913 2.5172,5.1998 2.525,6.9351 0.056,12.3751 -2.6547,5.849 -10.5529,9.5459 -16.0118,7.4947 z M 0.30306721,1184.7075 c -0.92249997,-2.4104 0.1901,-104.9931 1.13729999,-104.869 0.55,0.072 141.9073028,-195.90295 314.1272028,-435.50005 267.1254,-371.632 313.5125,-435.6775 315.75,-435.9474 l 2.6228,-0.3164 v 109.8329 109.8329 l -223,311.716 c -122.65,171.4438 -223,312.34645 -223,313.11695 0,0.7704 1.0125,1.6722 2.25,2.0038 1.2375,0.3317 101.5875,0.6091 223,0.6166 l 220.75,0.014 v 64.9969 64.9969 l -316.6273,0.2531 c -210.3966,0.1682 -316.75570279,-0.082 -317.01000279,-0.7469 z M 652.94037,620.19965 V 55.19185 l 60.0096,0.2578 60.0097,0.2578 300.46643,430.5 300.4665,430.5 0.024,116.31645 0.024,116.3164 -2.6554,-0.3164 c -2.2986,-0.2739 -42.237,-56.8395 -297.2856,-421.05205 -162.04663,-231.4046 -295.20693,-421.3046 -295.91193,-422 -1.035,-1.021 -1.5575,-0.8908 -2.7144,0.6767 -1.2386,1.678 -1.4329,61.3658 -1.4329,440.25 v 438.30895 h -60.5 -60.5 z M 2050.7417,1182.7075 1930.5911,960.81935 c -94.3733,-174.2837 -120.6583,-222.0753 -122.5167,-222.7607 -3.0189,-1.1134 -270.6801,-0.6387 -271.8008,0.4821 -0.4582,0.4583 -0.9487,100.6958 -1.0898,222.75 l -0.2566,221.91675 h -70.9934 -70.9934 V 619.17405 55.14055 l 237.25,0.3198 237.25,0.3199 20,2.6554 c 62.8363,8.3427 115.5233,27.0938 160.5,57.1213 34.8659,23.2773 67.0471,56.7779 89.107,92.7606 21.9564,35.8137 36.7926,78.6097 43.4692,125.3899 2.5283,17.715 2.7189,21.4685 2.8177,55.5 0.1128,38.8228 -0.5703,49.0154 -5.0269,75 -7.6388,44.5383 -23.9656,87.0997 -47.1662,122.9547 -36.6716,56.6737 -92.755,100.9331 -156.2008,123.2691 -6.325,2.2268 -12.0744,4.5778 -12.7764,5.2245 -1.0161,0.9362 24.8117,48.0299 126.6455,230.922 36.3119,74.12945 101.2195,170.01555 132.1557,237.33215 -64.0022,-1.0095 -102.8489,-0.9963 -170.2235,-1.2024 z M 1847.4404,607.84935 c 52.655,-6.6028 90.0965,-21.482 121.6236,-48.333 43.3248,-36.8989 65.8904,-92.6756 65.8676,-162.8089 -0.017,-53.8625 -13.5562,-97.3212 -41.8139,-134.2203 -6.0437,-7.892 -21.5623,-23.5244 -30.6773,-30.9024 -24.2249,-19.6084 -61.1047,-35.6748 -97,-42.2571 -30.8343,-5.6543 -27.9619,-5.567 -184,-5.5947 l -144,-0.025 -0.2564,212 c -0.141,116.6 -0.031,212.5939 0.2454,213.3198 0.4135,1.0875 26.5898,1.2435 148.7564,0.886 129.2875,-0.3782 149.9178,-0.6422 161.2546,-2.0638 z M 21.704467,119.62385 c -0.1453,-36.621 -0.076,-66.771 0.1526,-67 0.5448,-0.5445 612.621803,-0.5445 613.166703,0 0.2291,0.229 0.2978,30.379 0.1526,67 l -0.264,66.5836 H 328.44037 21.968467 z M 682.69037,53.45805 c 16.6375,-0.154 43.8625,-0.154 60.5,0 16.6375,0.1539 3.025,0.2798 -30.25,0.2798 -33.275,0 -46.8875,-0.1259 -30.25,-0.2798 z m 823.50003,-6e-4 c 63.1125,-0.1421 166.3875,-0.1421 229.5,0 63.1125,0.1422 11.475,0.2585 -114.75,0.2585 -126.225,0 -177.8625,-0.1163 -114.75,-0.2585 z" />
+                </svg>
+            </div>
+            
+            <p class="hero-tagline" data-i18n="hero_tagline">Professionelle Audioproduktion</p>
+            
+            <div class="social-icons">
+                <a href="https://www.instagram.com/felix_znr/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.crew-united.com/de/Felix-Zoellner_417100.html#!searchterm=felix%20zöllner" target="_blank" title="Crew United"><i class="fas fa-film"></i></a>
+                <a href="https://www.imdb.com/de/name/nm10693773/?ref_=fn_t_1" target="_blank" title="IMDb"><i class="fab fa-imdb"></i></a>
+            </div>
         </div>
     </section>
 
     <section id="film" class="section-dark">
         <div class="container">
-            <h2 data-en="Film">Film</h2>
-            <div class="grid film-grid">
-                <div class="grid-item film-item" onclick="openModal('Artemis 2 - Zurück zum Mond', 'Dokumentarfilm', '2025', 'Dorthea Nölle', 'Sounddesign & Mischung', 'content/plakat_artemisII.jpg')">
-                    <img src="content/plakat_artemisII.jpg" alt="Artemis 2">
+            <h2 data-i18n="section_film">Film</h2>
+            <div class="grid-container" id="grid-film">
                 </div>
-                <div class="grid-item film-item" onclick="openModal('Die Sachsen', 'Dokumentarfilm', '2024', 'Volker Schmidt-Sondermann & Bettina Wobst', 'Sounddesign & Mischung', 'content/plakat_diesachsen.jpg')">
-                    <img src="content/plakat_diesachsen.jpg" alt="Die Sachsen">
-                </div>
-                <div class="grid-item film-item" onclick="openModal('37° Grad - Stuntfrauen', 'Dokumentarfilm', '2025', 'Volker Schmidt-Sondermann', 'Sounddesign & Mischung', 'content/plakat_stuntfrauen.jpg')">
-                    <img src="content/plakat_stuntfrauen.jpg" alt="Stuntfrauen">
-                </div>
-                <div class="grid-item film-item" onclick="openModal('Psykhe', 'Kurzspielfilm', '2020', 'Joshua Krull', '1. Filmtonsassistenz', 'content/plakat_psykhe.jpg')">
-                    <img src="content/plakat_psykhe.jpg" alt="Psykhe">
-                </div>
-            </div>
-            <div class="btn-container">
-                <button class="btn-toggle" onclick="toggleGrid(this, 'film-grid')" data-en-more="Show more" data-en-less="Show less">Mehr anzeigen</button>
+            <div class="load-more-container">
+                <button class="btn" id="btn-film" onclick="toggleSection('film')" data-i18n="btn_more">Mehr anzeigen</button>
             </div>
         </div>
     </section>
 
     <section id="imagefilm" class="section-medium">
         <div class="container">
-            <h2 data-en="Imagefilm">Imagefilm</h2>
-            <div class="grid imagefilm-grid">
-                <div class="grid-item imagefilm-item" onclick="openModal('Audi - Quest for Perfection', 'Industriefilm', '2019', 'Alexander Fuhrmann', 'Sounddesign & Mischung', 'content/poster_audi.jpg')">
-                    <img src="content/poster_audi.jpg" alt="Audi">
+            <h2 data-i18n="section_imagefilm">Imagefilm</h2>
+            <div class="grid-container" id="grid-imagefilm">
                 </div>
-                <div class="grid-item imagefilm-item" onclick="openModal('BMW - xDrive', 'Werbefilm', '2016', 'Péter Palátsik', 'Sounddesign', 'content/poster_bmwxdrive.jpg')">
-                    <img src="content/poster_bmwxdrive.jpg" alt="BMW">
-                </div>
-                <div class="grid-item imagefilm-item" onclick="openModal('EnviaM - Glasfaser', 'Werbefilm', '2022', 'Anton Polinski', 'Filmtonmeister', 'content/poster_glasfaser.jpg')">
-                    <img src="content/poster_glasfaser.jpg" alt="EnviaM">
-                </div>
-                <div class="grid-item imagefilm-item" onclick="openModal('DIMENSION', 'Trailer', '2021', 'Jo Siamon Salich', 'Tonmeister', 'content/poster_dimension.jpg')">
-                    <img src="content/poster_dimension.jpg" alt="Dimension">
-                </div>
-                <div class="grid-item imagefilm-item" onclick="openModal('HZDR BMBF R³', 'Dokumentarfilm', '2015', 'Phillip Büttner', 'Sounddesign', 'content/poster_HZDRBMBF.jpg')">
-                    <img src="content/poster_HZDRBMBF.jpg" alt="HZDR">
-                </div>
-                <div class="grid-item imagefilm-item" onclick="openModal('Lidl - Crivit Pro', 'Werbefilm', '2015', 'Alexander Fuhrmann', 'Filmtonassistenz', 'content/poster_lidl.jpg')">
-                    <img src="content/poster_lidl.jpg" alt="Lidl">
-                </div>
-                <div class="grid-item imagefilm-item" onclick="openModal('Singt Schütz', 'Trailer', '2022', 'Clemens Preiser', 'Tonmeister', 'content/poster_schuetz.jpg')">
-                    <img src="content/poster_schuetz.jpg" alt="Schütz">
-                </div>
-            </div>
-            <div class="btn-container">
-                <button class="btn-toggle" onclick="toggleGrid(this, 'imagefilm-grid')" data-en-more="Show more" data-en-less="Show less">Mehr anzeigen</button>
+            <div class="load-more-container">
+                <button class="btn" id="btn-imagefilm" onclick="toggleSection('imagefilm')" data-i18n="btn_more">Mehr anzeigen</button>
             </div>
         </div>
     </section>
 
-    <section class="section-white">
+    <section id="clients">
         <div class="container">
-            <div class="logos-row">
-                <img src="content/logo_arte.svg" class="logo-client" alt="Arte">
-                <img src="content/logo_ard.svg" class="logo-client" alt="ARD">
-                <img src="content/logo_zdf.svg" class="logo-client" alt="ZDF">
-                <img src="content/logo_mdr.svg" class="logo-client" alt="MDR">
-                <img src="content/logo_audi.svg" class="logo-client" alt="Audi">
-                <img src="content/logo_bmw.svg" class="logo-client" alt="BMW">
-                <img src="content/logo_vodafone.svg" class="logo-client" alt="Vodafone">
-                <img src="content/logo_lidl.svg" class="logo-client" alt="Lidl">
+            <div class="clients-wrapper">
+                <img src="content/logo_arte.svg" alt="Arte" class="client-logo">
+                <img src="content/logo_ard.svg" alt="ARD" class="client-logo">
+                <img src="content/logo_zdf.svg" alt="ZDF" class="client-logo">
+                <img src="content/logo_mdr.svg" alt="MDR" class="client-logo">
+                <img src="content/logo_audi.svg" alt="Audi" class="client-logo">
+                <img src="content/logo_bmw.svg" alt="BMW" class="client-logo">
+                <img src="content/logo_vodafone.svg" alt="Vodafone" class="client-logo">
+                <img src="content/logo_lidl.svg" alt="Lidl" class="client-logo">
             </div>
         </div>
     </section>
 
-    <section id="musik" class="section-light">
+    <section id="music" class="section-light">
         <div class="container">
-            <h2 data-en="Music">Musik</h2>
-            <div class="grid music-grid">
-                <div class="grid-item music-item" onclick="openModal('Smoking Dromedary', 'Album', '2019', 'Steaming Animals', 'Recording & Mixing', 'https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/96/1b/6e/961b6e14-37d1-a242-6ff6-7a15c8d99a9e/cover_10157518.jpg/316x316bb.webp', 'https://music.apple.com/de/album/smoking-dromedary/1477838600')">
-                    <img src="https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/96/1b/6e/961b6e14-37d1-a242-6ff6-7a15c8d99a9e/cover_10157518.jpg/316x316bb.webp" alt="Smoking Dromedary">
+            <h2 data-i18n="section_music">Musik</h2>
+            <div class="grid-container" id="grid-music">
                 </div>
-                <div class="grid-item music-item" onclick="openModal('iPhone', 'Single', '2025', 'in:numbers', 'Mastering', 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/aa/11/a9/aa11a9e1-5124-27f7-c409-b369c9c9c613/artwork.jpg/300x300bb.webp', 'https://music.apple.com/de/song/iphone/1855408051')">
-                    <img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/aa/11/a9/aa11a9e1-5124-27f7-c409-b369c9c9c613/artwork.jpg/300x300bb.webp" alt="iPhone">
-                </div>
-                <div class="grid-item music-item" onclick="openModal('Sincerely', 'Album', '2021', 'The Frank & The Earnest', 'Mixing', 'https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/33/b0/89/33b089a6-e46d-ba3e-41cd-e5a2ee77878e/cover_4064832291575.jpg/316x316bb.webp', 'https://music.apple.com/de/album/sincerely/1540729763')">
-                    <img src="https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/33/b0/89/33b089a6-e46d-ba3e-41cd-e5a2ee77878e/cover_4064832291575.jpg/316x316bb.webp" alt="Sincerely">
-                </div>
-                <div class="grid-item music-item" onclick="openModal('Getäuscht', 'Single', '2024', 'ARISTOMANE, Aktiv & EchoSports', 'Mastering', 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/a0/f8/1e/a0f81e71-48d9-c01d-c838-7074fcc3e221/7300342320600.jpg/316x316bb.webp', 'https://music.apple.com/de/album/get%C3%A4uscht-single/1769996089')">
-                    <img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/a0/f8/1e/a0f81e71-48d9-c01d-c838-7074fcc3e221/7300342320600.jpg/316x316bb.webp" alt="Getäuscht">
-                </div>
-            </div>
-            <div class="btn-container">
-                <button class="btn-toggle" onclick="toggleGrid(this, 'music-grid')" data-en-more="Show more" data-en-less="Show less">Mehr anzeigen</button>
+            <div class="load-more-container">
+                <button class="btn" id="btn-music" onclick="toggleSection('music')" data-i18n="btn_more">Mehr anzeigen</button>
             </div>
         </div>
     </section>
 
-    <section id="kontakt" class="section-dark">
+    <section id="contact">
         <div class="container">
-            <h2 data-en="Contact">Kontakt</h2>
+            <h2 data-i18n="section_contact">Kontakt</h2>
             <div class="contact-content">
-                <img src="content/me.jpg" class="profile-img" alt="Felix Zöllner">
-                <div>
-                    <p data-en="I am Felix Zöllner, freelance sound engineer in Dresden since 2017. I realize projects for film, podcast, music and other media formats. From sound design and editing to the final mix.">
+                <div class="contact-photo">
+                    <img src="content/me.jpg" alt="Felix Zöllner">
+                </div>
+                <div class="contact-info">
+                    <p data-i18n="contact_text">
                         Ich bin Felix Zöllner, seit 2017 freiberuflicher Tonmeister in Dresden. Ich realisiere Projekte für Film, Podcast, Musik und auch andere Medienformate. Vom Sounddesign und Schnitt, bis zur finalen Mischung.
                     </p>
-                    <br>
                     <p>
-                        Email: <span class="hidden-contact"><strong>[Anzeigen]</strong><span>mail@znr-audio.de</span></span><br>
-                        Tel: <span class="hidden-contact"><strong>[Anzeigen]</strong><span>+49 351 40423751</span></span>
+                        <i class="fas fa-envelope"></i> 
+                        <span id="email-contact" class="contact-reveal" onclick="revealContact(this)" data-user="mail" data-domain="znr-audio.de" data-i18n="click_mail">E-Mail anzeigen</span>
+                    </p>
+                    <p>
+                        <i class="fas fa-phone"></i> 
+                        <span id="phone-contact" class="contact-reveal" onclick="revealContact(this)" data-phone="+49 351 40423751" data-i18n="click_phone">Telefonnummer anzeigen</span>
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="projectModal" class="modal" onclick="closeModal(event)">
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Felix Zöllner</p>
+            <div class="footer-links">
+                <button onclick="toggleLegal('impressum')" data-i18n="footer_impressum">Impressum</button>
+                <button onclick="toggleLegal('datenschutz')" data-i18n="footer_privacy">Datenschutz</button>
+            </div>
+        </div>
+    </footer>
+
+    <div id="project-modal" class="modal-overlay" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close-modal" onclick="closeModal(null)">&times;</span>
-            <img id="modalImg" src="" class="modal-img">
-            <div class="modal-info">
-                <h3 id="modalTitle">Projekt Name</h3>
-                <p id="modalGenreYear">Genre | Jahr</p>
-                <p id="modalCreator">Regie / Artist</p>
-                <p id="modalRole" class="role-highlight">Meine Rolle</p>
-                <a id="modalAppleLink" href="#" target="_blank" class="apple-music-btn" style="display:none;">
+            <span class="modal-close" onclick="closeModal(event)">&times;</span>
+            <div class="modal-image-col">
+                <img id="modal-img" src="" alt="">
+            </div>
+            <div class="modal-info-col">
+                <h3 id="modal-title" class="modal-title"></h3>
+                <p id="modal-meta" class="modal-meta"></p>
+                <div id="modal-details" class="modal-details">
+                    </div>
+                <div class="modal-role">
+                    <span data-i18n="label_role">Rolle:</span> <span id="modal-role-text"></span>
+                </div>
+                <a id="modal-apple-link" href="#" target="_blank" class="modal-apple-link" style="display:none;">
                     <i class="fab fa-apple"></i> Apple Music
                 </a>
             </div>
         </div>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Felix Zöllner</p>
-            <div class="footer-links">
-                <a href="#" onclick="showLegal('impressum')">Impressum</a> | 
-                <a href="#" onclick="showLegal('datenschutz')">Datenschutz</a>
-            </div>
-            <button class="btn-toggle lang-toggle" onclick="toggleLanguage()">DE / EN</button>
+    <div id="legal-modal" class="modal-overlay" onclick="toggleLegal()">
+        <div class="modal-content" id="legal-modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="toggleLegal()">&times;</span>
+            <div id="legal-text-container"></div>
         </div>
-    </footer>
+    </div>
 
     <script>
-        // Grid Toggle Logic
-        function toggleGrid(btn, gridClass) {
-            const grid = document.querySelector('.' + gridClass);
-            const items = grid.querySelectorAll('.grid-item');
+        /* --- DATA --- */
+        const films = [
+            { title: "Artemis 2 - Zurück zum Mond", type: "Dokumentarfilm", year: "2025", director: "Dorthea Nölle", role: "Sounddesign & Mischung", img: "content/plakat_artemisII.jpg" },
+            { title: "Die Sachsen - Piraten · Heiden · Kaiser", type: "Dokumentarfilm", year: "2024", director: "Volker Schmidt-Sondermann & Bettina Wobst", role: "Sounddesign & Mischung", img: "content/plakat_diesachsen.jpg" },
+            { title: "37° Grad - Stuntfrauen", type: "Dokumentarfilm", year: "2025", director: "Volker Schmidt-Sondermann", role: "Sounddesign & Mischung", img: "content/plakat_stuntfrauen.jpg" },
+            { title: "Psykhe", type: "Kurzspielfilm", year: "2020", director: "Joshua Krull", role: "1. Filmtonsassistenz", img: "content/plakat_psykhe.jpg" }
+        ];
+
+        const imagefilms = [
+            { title: "Audi - Quest for Perfection", type: "Industriefilm", year: "2019", director: "Alexander Fuhrmann", role: "Sounddesign & Mischung", img: "content/poster_audi.jpg" },
+            { title: "BMW - xDrive. Get out there", type: "Werbefilm", year: "2016", director: "Péter Palátsik", role: "Sounddesign", img: "content/poster_bmwxdrive.jpg" },
+            { title: "EnviaM - Was tun, wenn es ruckelt?", type: "Werbefilm", year: "2022", director: "Anton Polinski", role: "Filmtonmeister", img: "content/poster_glasfaser.jpg" },
+            { title: "DIMENSION", type: "Trailer", year: "2021", director: "Jo Siamon Salich", role: "Tonmeister", img: "content/poster_dimension.jpg" },
+            { title: "HZDR BMBF R³", type: "Dokumentarfilm/Imagefilm", year: "2015", director: "Phillip Büttner", role: "Sounddesign", img: "content/poster_HZDRBMBF.jpg" },
+            { title: "Lidl - Crivit Pro", type: "Werbefilm", year: "2015", director: "Alexander Fuhrmann", role: "Filmtonassistenz", img: "content/poster_lidl.jpg" },
+            { title: "Singt Schütz", type: "Trailer", year: "2022", director: "Clemens Preiser", role: "Tonmeister", img: "content/poster_schuetz.jpg" },
+            { title: "VIRTUELLE HILFE VODAFONE", type: "Hilfe Videos", year: "2016", director: "Anne Dietrich", role: "Sounddesign & ADR", img: "content/poster_vodafone.jpg" },
+            { title: "Mit POLDI sicher unterwegs!", type: "Hilfe Videos", year: "2017", director: "Anne Dietrich", role: "Sounddesign", img: "content/poster_poldi.jpg" }
+        ];
+
+        const music = [
+            { title: "Smoking Dromedary", artist: "Steaming Animals", type: "Album", year: "2019", role: "Recording, Mixing", img: "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/96/1b/6e/961b6e14-37d1-a242-6ff6-7a15c8d99a9e/cover_10157518.jpg/316x316bb.webp", link: "https://music.apple.com/de/album/smoking-dromedary/1477838600" },
+            { title: "Sincerely", artist: "The Frank & The Earnest", type: "Album", year: "2021", role: "Mixing", img: "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/33/b0/89/33b089a6-e46d-ba3e-41cd-e5a2ee77878e/cover_4064832291575.jpg/316x316bb.webp", link: "https://music.apple.com/de/album/sincerely/1540729763" },
+            { title: "iPhone", artist: "in:numbers", type: "Single", year: "2025", role: "Mastering", img: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/aa/11/a9/aa11a9e1-5124-27f7-c409-b369c9c9c613/artwork.jpg/300x300bb.webp", link: "https://music.apple.com/de/song/iphone/1855408051" },
+            { title: "Getäuscht", artist: "ARISTOMANE, Aktiv & EchoSports", type: "Single", year: "2024", role: "Mastering", img: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/a0/f8/1e/a0f81e71-48d9-c01d-c838-7074fcc3e221/7300342320600.jpg/316x316bb.webp", link: "https://music.apple.com/de/album/get%C3%A4uscht-single/1769996089" },
+            { title: "Who Is You", artist: "ARISTOMANE, Schwert & Fonda", type: "Single", year: "2025", role: "Mastering", img: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/76/81/a7/7681a77c-7e6a-78fb-c7a1-bd7592478ddb/199066982020.jpg/316x316bb.webp", link: "https://music.apple.com/de/album/who-is-you-single/1800425474" },
+            { title: "Made of Stars", artist: "Tales of the Moon", type: "EP", year: "2025", role: "Mastering", img: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/a8/c9/35/a8c935ca-2767-9d13-b23d-0989b16fa028/artwork.jpg/316x316bb.webp", link: "https://music.apple.com/de/album/made-of-stars-ep/1791227213" },
+            { title: "Jardin Obscure", artist: "Georg Wieland Wagner", type: "Album", year: "2025", role: "Recording, Mixing", img: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d4/bb/b8/d4bbb83c-f853-6997-1c39-9605e3535ff5/artwork.jpg/316x316bb.webp", link: "https://music.apple.com/de/album/jardin-obscure/1806515049" },
+            { title: "Tales of the Moon", artist: "Tales of the Moon", type: "Album", year: "2025", role: "Mastering", img: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f5/11/40/f51140ba-db91-99a0-6f90-2740dd20b8a1/artwork.jpg/316x316bb.webp", link: "https://music.apple.com/de/album/tales-of-the-moon/1806840817" },
+            { title: "Millionen", artist: "Jusse Bo", type: "Album", year: "2025", role: "Mastering", img: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/9c/95/13/9c95131d-ec94-ee47-ba6c-8a2be0500067/artwork.jpg/316x316bb.webp", link: "https://music.apple.com/de/album/millionen/1793212288" },
+            { title: "Naufragium", artist: "Noemi La Terra et al.", type: "Album", year: "2024", role: "Mixing", img: "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/bd/1f/c7/bd1fc7dd-4f00-943d-8268-9b194ac5516c/DigiPAC-6stg-NP1272_Noemi_f.jpg/316x316bb.webp", link: "https://music.apple.com/de/album/naufragium/1736699396" },
+            { title: "Clouded Light", artist: "Steaming Animals", type: "Single", year: "2021", role: "Recording, Mixing", img: "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/78/d2/6e/78d26e3c-eca1-b64c-447d-505acf61e05f/cover_10189486.jpg/316x316bb.webp", link: "https://music.apple.com/de/album/clouded-light-single/1552364560" },
+            { title: "EP Trilogy", artist: "Kobayashi Maru", type: "EP", year: "2022", role: "Mixing", img: "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/e8/6c/7d/e86c7dde-be80-a150-d077-de70be39450b/cover_4099885818585.jpg/316x316bb.webp", link: "https://music.apple.com/de/album/ep-trilogy/1715286370" },
+            { title: "Wolken im Kopf", artist: "Jusse Bo", type: "Single", year: "2021", role: "Mixing", img: "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/68/81/c4/6881c46d-a048-89ae-dc1a-47b47d240a60/cover_10212014.jpg/316x316bb.webp", link: "https://music.apple.com/de/album/wolken-im-kopf-single/1595620501" },
+            { title: "Dreams", artist: "Fonda", type: "Single", year: "2022", role: "Mastering", img: "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/d1/73/96/d173965d-7c3b-6fca-6dbd-a3e231ba7cc2/artwork.jpg/300x300bb.webp", link: "https://music.apple.com/de/song/dreams/1602392844" },
+            { title: "Elegy of Desperate Children", artist: "PianoProject", type: "Album", year: "2014", role: "Mastering", img: "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/aa/df/95/aadf9515-9326-ae79-54c7-7ebf36fd7d98/cover.jpg/316x316bb.webp", link: "https://music.apple.com/de/album/elegy-of-desperate-children/1457222439" },
+            { title: "Messe h-Moll", artist: "Kammerchor Cantamus Dresden", type: "Live Album", year: "2020", role: "Recording", img: "https://s1.directupload.eu/images/260127/i2deooat.jpg", link: "https://youtu.be/XPHP1knLs64" }
+        ];
+
+        /* --- I18N DICTIONARY --- */
+        const translations = {
+            de: {
+                hero_tagline: "Professionelle Audioproduktion",
+                section_film: "Film",
+                section_imagefilm: "Imagefilm",
+                section_music: "Musik",
+                section_contact: "Kontakt",
+                btn_more: "Mehr anzeigen",
+                btn_less: "Weniger anzeigen",
+                contact_text: "Ich bin Felix Zöllner, seit 2017 freiberuflicher Tonmeister in Dresden. Ich realisiere Projekte für Film, Podcast, Musik und auch andere Medienformate. Vom Sounddesign und Schnitt, bis zur finalen Mischung.",
+                click_mail: "E-Mail anzeigen",
+                click_phone: "Telefonnummer anzeigen",
+                footer_impressum: "Impressum",
+                footer_privacy: "Datenschutz",
+                label_role: "Rolle:",
+                label_regie: "Regie",
+                label_artist: "Künstler"
+            },
+            en: {
+                hero_tagline: "Professional Audio Production",
+                section_film: "Film",
+                section_imagefilm: "Commercials",
+                section_music: "Music",
+                section_contact: "Contact",
+                btn_more: "Show more",
+                btn_less: "Show less",
+                contact_text: "I am Felix Zöllner, a freelance sound engineer based in Dresden since 2017. I realize projects for film, podcasts, music, and other media formats. From sound design and editing to the final mix.",
+                click_mail: "Show E-Mail",
+                click_phone: "Show Phone",
+                footer_impressum: "Imprint",
+                footer_privacy: "Privacy Policy",
+                label_role: "Role:",
+                label_regie: "Director",
+                label_artist: "Artist"
+            }
+        };
+
+        let currentLang = 'de';
+
+        /* --- FUNCTIONS --- */
+
+        function init() {
+            renderGrid('film', films);
+            renderGrid('imagefilm', imagefilms);
+            renderGrid('music', music, true);
+            
+            // Language detection
+            const userLang = navigator.language || navigator.userLanguage; 
+            if (userLang.startsWith('en')) {
+                setLanguage('en');
+            } else {
+                setLanguage('de');
+            }
+
+            document.getElementById('langToggle').addEventListener('click', () => {
+                const newLang = currentLang === 'de' ? 'en' : 'de';
+                setLanguage(newLang);
+            });
+        }
+
+        function renderGrid(sectionId, data, isMusic = false) {
+            const container = document.getElementById(`grid-${sectionId}`);
+            container.innerHTML = '';
+            
+            data.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'grid-item ' + (index < 4 ? 'visible' : '');
+                div.setAttribute('data-index', index);
+                
+                // Add click event for modal
+                div.onclick = () => openModal(item, isMusic);
+
+                const img = document.createElement('img');
+                img.src = item.img;
+                img.alt = item.title;
+                img.loading = "lazy";
+                
+                div.appendChild(img);
+                container.appendChild(div);
+            });
+
+            // Hide "Load More" if items <= 4
+            if (data.length <= 4) {
+                document.getElementById(`btn-${sectionId}`).style.display = 'none';
+            }
+        }
+
+        function toggleSection(sectionId) {
+            const container = document.getElementById(`grid-${sectionId}`);
+            const items = container.querySelectorAll('.grid-item');
+            const btn = document.getElementById(`btn-${sectionId}`);
+            
             const isExpanded = btn.getAttribute('data-expanded') === 'true';
             
             if (isExpanded) {
-                items.forEach((item, index) => { if(index >= 4) item.style.display = 'none'; });
-                btn.innerText = document.documentElement.lang === 'en' ? btn.getAttribute('data-en-more') : "Mehr anzeigen";
+                // Collapse
+                items.forEach((item, index) => {
+                    if (index >= 4) {
+                        item.classList.remove('visible');
+                        setTimeout(() => item.style.display = 'none', 300); // Wait for fade out
+                    }
+                });
                 btn.setAttribute('data-expanded', 'false');
+                btn.innerText = translations[currentLang].btn_more;
+                // Scroll back to top of section smoothly
+                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
             } else {
-                items.forEach(item => item.style.display = 'block');
-                btn.innerText = document.documentElement.lang === 'en' ? btn.getAttribute('data-en-less') : "Weniger anzeigen";
+                // Expand
+                items.forEach(item => {
+                    item.style.display = 'block';
+                    // Small delay to allow display block to apply before opacity transition
+                    setTimeout(() => item.classList.add('visible'), 10);
+                });
                 btn.setAttribute('data-expanded', 'true');
+                btn.innerText = translations[currentLang].btn_less;
             }
         }
 
-        // Modal Logic
-        function openModal(title, genre, year, creator, role, imgSrc, appleLink = null) {
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalGenreYear').innerText = `${genre} | ${year}`;
+        /* --- MODAL LOGIC --- */
+        function openModal(item, isMusic) {
+            const modal = document.getElementById('project-modal');
+            const roleLabel = translations[currentLang].label_role;
+            const personLabel = isMusic ? translations[currentLang].label_artist : translations[currentLang].label_regie;
+            const personName = isMusic ? item.artist : item.director;
+
+            document.getElementById('modal-img').src = item.img;
+            document.getElementById('modal-title').innerText = item.title;
+            document.getElementById('modal-meta').innerText = `${item.type} | ${item.year}`;
             
-            // Context sensitive naming (Artist vs Regie)
-            const isMusic = appleLink !== null;
-            const creatorLabel = isMusic ? "Artist: " : "Regie: ";
-            document.getElementById('modalCreator').innerText = creatorLabel + creator;
-            
-            document.getElementById('modalRole').innerText = role;
-            document.getElementById('modalImg').src = imgSrc;
-            
-            const aLink = document.getElementById('modalAppleLink');
-            if(appleLink) {
-                aLink.href = appleLink;
-                aLink.style.display = 'inline-flex';
+            const detailsContainer = document.getElementById('modal-details');
+            detailsContainer.innerHTML = `
+                <p><strong>${personLabel}:</strong> ${personName}</p>
+            `;
+
+            document.getElementById('modal-role-text').innerText = item.role;
+            document.querySelector('.modal-role span:first-child').innerText = roleLabel;
+
+            const appleLink = document.getElementById('modal-apple-link');
+            if (isMusic && item.link && item.link.includes('apple')) {
+                appleLink.href = item.link;
+                appleLink.style.display = 'inline-flex';
             } else {
-                aLink.style.display = 'none';
+                appleLink.style.display = 'none';
             }
-            
-            document.getElementById('projectModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
         }
 
-        function closeModal(e) {
-            document.getElementById('projectModal').style.display = 'none';
+        function closeModal(event) {
+            if (event) event.stopPropagation();
+            document.getElementById('project-modal').classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
-        // Language Toggle
-        let currentLang = 'de';
-        function toggleLanguage() {
-            currentLang = currentLang === 'de' ? 'en' : 'de';
-            document.documentElement.lang = currentLang;
+        /* --- CONTACT REVEAL --- */
+        function revealContact(el) {
+            if (el.id === 'email-contact') {
+                const user = el.getAttribute('data-user');
+                const domain = el.getAttribute('data-domain');
+                const email = `${user}@${domain}`;
+                el.innerText = email;
+                el.onclick = null; // Remove reveal listener
+                el.style.color = 'inherit';
+                el.style.borderBottom = 'none';
+                window.location.href = `mailto:${email}`;
+            } else if (el.id === 'phone-contact') {
+                const phone = el.getAttribute('data-phone');
+                el.innerText = phone;
+                el.onclick = null;
+                el.style.color = 'inherit';
+                el.style.borderBottom = 'none';
+                window.location.href = `tel:${phone.replace(/\s/g, '')}`;
+            }
+        }
+
+        /* --- I18N & LANGUAGE --- */
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('langToggle').innerText = lang === 'de' ? 'EN' : 'DE';
             
-            document.querySelectorAll('[data-en]').forEach(el => {
-                const deText = el.getAttribute('data-de') || el.innerText;
-                if (!el.getAttribute('data-de')) el.setAttribute('data-de', deText);
-                el.innerText = currentLang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-de');
+            // Translate static elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
             });
 
-            // Update Buttons
-            document.querySelectorAll('.btn-toggle[data-en-more]').forEach(btn => {
-                const isExpanded = btn.getAttribute('data-expanded') === 'true';
-                if(currentLang === 'en') {
-                    btn.innerText = isExpanded ? btn.getAttribute('data-en-less') : btn.getAttribute('data-en-more');
-                } else {
-                    btn.innerText = isExpanded ? "Weniger anzeigen" : "Mehr anzeigen";
+            // Update buttons state text if expanded
+            ['film', 'imagefilm', 'music'].forEach(sec => {
+                const btn = document.getElementById(`btn-${sec}`);
+                if (btn.getAttribute('data-expanded') === 'true') {
+                    btn.innerText = translations[lang].btn_less;
+                } else if (btn.style.display !== 'none') {
+                    btn.innerText = translations[lang].btn_more;
                 }
             });
         }
 
-        // Simple Legal Info (Simulated)
-        function showLegal(type) {
-            if(type === 'impressum') {
-                alert("Impressum\nFelix Zöllner\nWallotstraße\n01309 Dresden\nmail@znr-audio.de");
-            } else {
-                alert("Datenschutz\nDaten werden nur technisch für den Webserver-Betrieb erfasst.");
+        /* --- LEGAL MODALS (Content from Prompt) --- */
+        const legalTexts = {
+            impressum: `
+                <h2>Impressum</h2>
+                <p>Angaben gemäß § 5 TMG</p>
+                <p>Felix Zöllner<br>Wallotstraße<br>01309, Dresden<br>Deutschland</p>
+                <p>Kontakt:<br>mail@znr-audio.de</p>
+                <p>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:<br>Felix Zöllner</p>
+            `,
+            datenschutz: `
+                <h2>Datenschutzerklärung</h2>
+                <p>Der Schutz Ihrer persönlichen Daten ist mir ein besonderes Anliegen. Ich verarbeite Ihre Daten daher ausschließlich auf Grundlage der gesetzlichen Bestimmungen (DSGVO, TMG).</p>
+                <h3>Verantwortlicher</h3>
+                <p>Felix Zöllner</p>
+                <h3>Zugriffsdaten / Server-Logfiles</h3>
+                <p>Beim Besuch dieser Webseite werden automatisch Informationen durch den Webserver erfasst (z. B. IP-Adresse, Browsertyp, Betriebssystem, Datum und Uhrzeit des Zugriffs). Diese Daten dienen ausschließlich der technischen Überwachung und Verbesserung der Webseite und lassen keinen direkten Rückschluss auf Ihre Person zu.</p>
+                <h3>Kontaktaufnahme</h3>
+                <p>Wenn Sie per E-Mail Kontakt mit mir aufnehmen, werden Ihre angegebenen Daten zur Bearbeitung der Anfrage gespeichert. Diese Daten werden nicht ohne Ihre Einwilligung weitergegeben.</p>
+                <h3>Ihre Rechte</h3>
+                <p>Sie haben jederzeit das Recht auf: Auskunft über Ihre gespeicherten Daten, Berichtigung unrichtiger Daten, Löschung oder Einschränkung der Verarbeitung.</p>
+                <h3>Datensicherheit</h3>
+                <p>Ich setze technische und organisatorische Maßnahmen ein, um Ihre Daten vor unbefugtem Zugriff zu schützen.</p>
+            `
+        };
+
+        function toggleLegal(type) {
+            const modal = document.getElementById('legal-modal');
+            const content = document.getElementById('legal-text-container');
+            
+            if (!type) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                return;
             }
+
+            content.innerHTML = legalTexts[type];
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
-        // Geo-Detection (Mockup)
-        window.onload = () => {
-            const userLang = navigator.language || navigator.userLanguage;
-            if (!userLang.startsWith('de')) toggleLanguage();
-        };
+        // Init App
+        window.addEventListener('DOMContentLoaded', init);
+
     </script>
 </body>
 </html>
