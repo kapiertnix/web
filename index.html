@@ -367,7 +367,7 @@
             color: var(--text-light);
         }
         
-        .lang-toggle {
+        .footer-links .lang-toggle {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -546,12 +546,179 @@
             }
             .modal-title { font-size: 1.5rem; }
         }
-    </style>
+    
+
+        /* --- PATCHES: UI & ANIMATION TUNING (2026-02) --- */
+
+        /* Contact: remove underline and place socials a bit lower */
+        .contact-reveal {
+            border-bottom: none !important;
+            padding-bottom: 0 !important;
+            text-decoration: none;
+        }
+
+        .contact-info .contact-social {
+            margin-top: 2.5rem;
+        }
+
+        .contact-info .social-icons {
+            justify-content: flex-start;
+        }
+
+        @media (max-width: 600px) {
+            .contact-info .social-icons {
+                justify-content: center;
+            }
+        }
+
+        /* Footer: integrated language toggle + centered legal links */
+        footer {
+            background-color: var(--bg-medium);
+            border-top: 1px solid #222;
+            padding: 45px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            display: block;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links button {
+            margin: 0;
+        }
+
+        .footer-links .footer-link-btn {
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            padding: 6px 8px;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .footer-links .footer-link-btn:hover {
+            color: var(--text-light);
+        }
+
+        .footer-copy {
+            margin: 0;
+            color: #666;
+        }
+
+        /* Lang toggle: no longer floating */
+        .footer-links .lang-toggle {
+            position: static;
+            bottom: auto;
+            right: auto;
+            z-index: auto;
+            background: transparent;
+            border: 1px solid #444;
+            color: var(--text-light);
+            padding: 7px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .footer-links .lang-toggle:hover {
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+            color: #fff;
+        }
+
+        /* Modal: smoother fade/slide */
+        .modal-overlay {
+            transition: opacity 0.35s ease;
+        }
+
+        .modal-content {
+            opacity: 0;
+            transform: translateY(18px) scale(0.985);
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .modal-overlay.active .modal-content {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-info-col {
+            justify-content: flex-start;
+        }
+
+        /* Apple Music: button at bottom of infobox */
+        .modal-apple-link {
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            background: #fa243c; /* Apple Music red */
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+            align-self: flex-start;
+            transition: transform var(--transition-speed) ease, background var(--transition-speed) ease, border-color var(--transition-speed) ease;
+        }
+
+        .modal-apple-link i {
+            margin: 0; /* overridden by gap */
+            font-size: 1.2rem;
+        }
+
+        .modal-apple-link:hover {
+            transform: translateY(-1px);
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+        }
+
+        /* Grid: smoother show more / less transitions */
+        .grid-item {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            will-change: opacity, transform;
+        }
+
+        .grid-item.visible {
+            animation: none;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .grid-item.visible.is-hiding {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+</style>
 </head>
 <body>
-
-    <button class="lang-toggle" id="langToggle">EN</button>
-
     <section id="hero">
         <div class="hero-content">
             <div class="hero-logo">
@@ -561,12 +728,6 @@
             </div>
             
             <p class="hero-tagline" data-i18n="hero_tagline">Professionelle Audioproduktion</p>
-            
-            <div class="social-icons">
-                <a href="https://www.instagram.com/felix_znr/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.crew-united.com/de/Felix-Zoellner_417100.html#!searchterm=felix%20zöllner" target="_blank" title="Crew United"><i class="fas fa-film"></i></a>
-                <a href="https://www.imdb.com/de/name/nm10693773/?ref_=fn_t_1" target="_blank" title="IMDb"><i class="fab fa-imdb"></i></a>
-            </div>
         </div>
     </section>
 
@@ -637,18 +798,28 @@
                         <i class="fas fa-phone"></i> 
                         <span id="phone-contact" class="contact-reveal" onclick="revealContact(this)" data-phone="+49 351 40423751" data-i18n="click_phone">Telefonnummer anzeigen</span>
                     </p>
+                    <div class="contact-social">
+                        <div class="social-icons">
+                            <a href="https://www.instagram.com/felix_znr/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.crew-united.com/de/Felix-Zoellner_417100.html#!searchterm=felix%20zöllner" target="_blank" title="Crew United"><i class="fas fa-film"></i></a>
+                            <a href="https://www.imdb.com/de/name/nm10693773/?ref_=fn_t_1" target="_blank" title="IMDb"><i class="fab fa-imdb"></i></a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
 
+    
     <footer>
-        <div class="container">
-            <p>&copy; 2026 Felix Zöllner</p>
+        <div class="container footer-container">
             <div class="footer-links">
-                <button onclick="toggleLegal('impressum')" data-i18n="footer_impressum">Impressum</button>
-                <button onclick="toggleLegal('datenschutz')" data-i18n="footer_privacy">Datenschutz</button>
+                <button class="footer-link-btn" onclick="toggleLegal('impressum')" data-i18n="footer_impressum">Impressum</button>
+                <button class="lang-toggle" id="langToggle" type="button" aria-label="Language toggle">EN</button>
+                <button class="footer-link-btn" onclick="toggleLegal('datenschutz')" data-i18n="footer_privacy">Datenschutz</button>
             </div>
+            <p class="footer-copy">&copy; 2026 Felix Zöllner</p>
         </div>
     </footer>
 
@@ -667,7 +838,7 @@
                     <span data-i18n="label_role"></span> <span id="modal-role-text"></span>
                 </div>
                 <a id="modal-apple-link" href="#" target="_blank" class="modal-apple-link" style="display:none;">
-                    <i class="fab fa-apple"></i> Apple Music
+                    <i class="fab fa-apple"></i> <span data-i18n="btn_apple">listen on apple Music</span>
                 </a>
             </div>
         </div>
@@ -735,6 +906,7 @@
                 click_phone: "Telefonnummer anzeigen",
                 footer_impressum: "Impressum",
                 footer_privacy: "Datenschutz",
+                btn_apple: "listen on apple Music",
                 label_role: "",
                 label_regie: "Regie",
                 label_artist: "Artist"
@@ -752,6 +924,7 @@
                 click_phone: "Show Phone",
                 footer_impressum: "Imprint",
                 footer_privacy: "Privacy Policy",
+                btn_apple: "listen on apple Music",
                 label_role: "",
                 label_regie: "Director",
                 label_artist: "Artist"
@@ -812,28 +985,38 @@
             const container = document.getElementById(`grid-${sectionId}`);
             const items = container.querySelectorAll('.grid-item');
             const btn = document.getElementById(`btn-${sectionId}`);
-            
+
             const isExpanded = btn.getAttribute('data-expanded') === 'true';
-            
+            const fadeDuration = 380; // keep in sync with CSS transition
+
             if (isExpanded) {
-                // Collapse
+                // Collapse (smooth fade-out)
                 items.forEach((item, index) => {
-                    if (index >= 4) {
-                        item.classList.remove('visible');
-                        setTimeout(() => item.style.display = 'none', 300); // Wait for fade out
+                    if (index >= 4 && item.classList.contains('visible')) {
+                        item.classList.add('is-hiding');
+                        setTimeout(() => {
+                            item.classList.remove('visible', 'is-hiding');
+                            item.style.display = 'none';
+                        }, fadeDuration);
                     }
                 });
+
                 btn.setAttribute('data-expanded', 'false');
                 btn.innerText = translations[currentLang].btn_more;
+
                 // Scroll back to top of section smoothly
                 document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
             } else {
-                // Expand
-                items.forEach(item => {
-                    item.style.display = 'block';
-                    // Small delay to allow display block to apply before opacity transition
-                    setTimeout(() => item.classList.add('visible'), 10);
+                // Expand (smooth fade-in)
+                items.forEach((item, index) => {
+                    if (index >= 4) {
+                        item.style.display = 'block';
+                        item.classList.remove('is-hiding');
+                        // Allow display:block to apply before transitioning opacity
+                        requestAnimationFrame(() => item.classList.add('visible'));
+                    }
                 });
+
                 btn.setAttribute('data-expanded', 'true');
                 btn.innerText = translations[currentLang].btn_less;
             }
@@ -851,9 +1034,16 @@
             document.getElementById('modal-meta').innerText = `${item.type} | ${item.year}`;
             
             const detailsContainer = document.getElementById('modal-details');
-            detailsContainer.innerHTML = `
-                <p><strong>${personLabel}:</strong> ${personName}</p>
-            `;
+            if (isMusic) {
+                // No "Artist:" prefix for music items
+                detailsContainer.innerHTML = `
+                    <p class="modal-artist">${personName}</p>
+                `;
+            } else {
+                detailsContainer.innerHTML = `
+                    <p><strong>${personLabel}:</strong> ${personName}</p>
+                `;
+            }
 
             document.getElementById('modal-role-text').innerText = item.role;
             document.querySelector('.modal-role span:first-child').innerText = roleLabel;
@@ -925,24 +1115,72 @@
         const legalTexts = {
             impressum: `
                 <h2>Impressum</h2>
-                <p>Angaben gemäß § 5 TMG</p>
-                <p>Felix Zöllner<br>Wallotstraße<br>01309, Dresden<br>Deutschland</p>
-                <p>Kontakt:<br>mail@znr-audio.de</p>
-                <p>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:<br>Felix Zöllner</p>
+                <p><strong>Angaben gemäß § 5 DDG</strong></p>
+                <p>
+                    Felix Zöllner<br>
+                    Wallotstraße<br>
+                    01309 Dresden<br>
+                    Deutschland
+                </p>
+                <p>E-Mail: mail(A)znr-audio.de</p>
+                <p>
+                    Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV:<br>
+                    Felix Zöllner
+                </p>
             `,
             datenschutz: `
                 <h2>Datenschutzerklärung</h2>
-                <p>Der Schutz Ihrer persönlichen Daten ist mir ein besonderes Anliegen. Ich verarbeite Ihre Daten daher ausschließlich auf Grundlage der gesetzlichen Bestimmungen (DSGVO, TMG).</p>
-                <h3>Verantwortlicher</h3>
-                <p>Felix Zöllner</p>
-                <h3>Zugriffsdaten / Server-Logfiles</h3>
-                <p>Beim Besuch dieser Webseite werden automatisch Informationen durch den Webserver erfasst (z. B. IP-Adresse, Browsertyp, Betriebssystem, Datum und Uhrzeit des Zugriffs). Diese Daten dienen ausschließlich der technischen Überwachung und Verbesserung der Webseite und lassen keinen direkten Rückschluss auf Ihre Person zu.</p>
-                <h3>Kontaktaufnahme</h3>
-                <p>Wenn Sie per E-Mail Kontakt mit mir aufnehmen, werden Ihre angegebenen Daten zur Bearbeitung der Anfrage gespeichert. Diese Daten werden nicht ohne Ihre Einwilligung weitergegeben.</p>
-                <h3>Ihre Rechte</h3>
-                <p>Sie haben jederzeit das Recht auf: Auskunft über Ihre gespeicherten Daten, Berichtigung unrichtiger Daten, Löschung oder Einschränkung der Verarbeitung.</p>
-                <h3>Datensicherheit</h3>
-                <p>Ich setze technische und organisatorische Maßnahmen ein, um Ihre Daten vor unbefugtem Zugriff zu schützen.</p>
+
+                <h3>1. Allgemeine Hinweise</h3>
+                <p>Der Schutz Ihrer persönlichen Daten ist mir wichtig. Personenbezogene Daten werden auf dieser Website nur im technisch notwendigen Umfang verarbeitet.</p>
+
+                <p><strong>Verantwortlicher</strong> im Sinne der Datenschutzgesetze, insbesondere der DSGVO:</p>
+                <p>
+                    Felix Zöllner<br>
+                    Wallotstraße<br>
+                    01309 Dresden<br>
+                    Deutschland
+                </p>
+                <p>E-Mail: mail(A)znr-audio.de</p>
+
+                <h3>2. Hosting und Server-Logfiles</h3>
+                <p>Beim Besuch dieser Website erhebt der Hosting-Anbieter automatisch Daten über Zugriffe auf die Seite (sogenannte Server-Logfiles).</p>
+                <p>Erfasst werden können:</p>
+                <ul>
+                    <li>Besuchte Seite</li>
+                    <li>Datum und Uhrzeit des Zugriffs</li>
+                    <li>Übertragene Datenmenge</li>
+                    <li>Browsertyp und Browserversion</li>
+                    <li>Betriebssystem</li>
+                    <li>Referrer-URL</li>
+                    <li>IP-Adresse (gekürzt oder anonymisiert, sofern vom Hoster vorgesehen)</li>
+                </ul>
+                <p>Diese Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem technisch fehlerfreien Betrieb der Website).</p>
+
+                <h3>3. Kontaktaufnahme per E-Mail oder Telefon</h3>
+                <p>Wenn Sie mich per E-Mail oder Telefon kontaktieren, werden Ihre Angaben zur Bearbeitung der Anfrage gespeichert.</p>
+                <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertrag / vorvertragliche Maßnahmen) oder Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse).</p>
+                <p>Eine Weitergabe an Dritte erfolgt nicht ohne Ihre ausdrückliche Einwilligung.</p>
+
+                <h3>4. Externe Links und Social Media</h3>
+                <p>Diese Website enthält Links zu externen Plattformen (z. B. Instagram, IMDB, Crew United, Apple Music).</p>
+                <p>Beim Anklicken eines Links verlassen Sie diese Website. Für die Datenverarbeitung auf den verlinkten Plattformen ist ausschließlich der jeweilige Anbieter verantwortlich.</p>
+                <p>Es werden durch diese Website keine Social-Media-Plugins oder Tracking-Tools eingesetzt (sofern zutreffend).</p>
+
+                <h3>5. Ihre Rechte</h3>
+                <p>Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf:</p>
+                <ul>
+                    <li>Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)</li>
+                    <li>Berichtigung (Art. 16 DSGVO)</li>
+                    <li>Löschung (Art. 17 DSGVO)</li>
+                    <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+                    <li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
+                    <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+                </ul>
+                <p>Zudem steht Ihnen ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde zu.</p>
+
+                <h3>6. SSL- bzw. TLS-Verschlüsselung</h3>
+                <p>Diese Website nutzt aus Sicherheitsgründen eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie an „https://“ in der Adresszeile Ihres Browsers.</p>
             `
         };
 
